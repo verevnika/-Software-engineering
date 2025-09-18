@@ -1,0 +1,2 @@
+word="my"
+print(f"Hello, {word} World!")
