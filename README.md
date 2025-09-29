@@ -206,6 +206,7 @@ print(str.replace("ugly", "beauty"))
 print(str.startswith("The"))
 print(str.endswith("end"))
 ```
+Результат.
 ![4](images/sam_4.png)
 # Выводы  
 В этом задание разбираем предложение, заменяем нужные слова.
@@ -225,6 +226,8 @@ memory = string
 print(memory)
 ![5](images/sam_5.png)
 ```
+Результат.
+![5](images/sam_5.png)
 # Выводы  
 Программа выводит Hello и Hello word 10 раз.
 
