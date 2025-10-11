@@ -1,0 +1,4 @@
+set_1={'WHITE','BLACK','RED','PINK'}
+set_2={'RED','GREEN','BLUE','RED'}
+print('1', set_1 - set_2)
+
