@@ -1,0 +1,39 @@
+class Book:
+    def __init__(self, title, author, pages, genre, year):
+        self.title = title
+        self.author = author
+        self.pages = pages
+        self.genre = genre
+        self.year = year
+        self.is_read = False
+        self.current_page = 0
+    
+    def show_info(self):
+        print(f"Книга: '{self.title}'")
+        print(f"Автор: {self.author}")
+        print(f"Жанр: {self.genre}, Год: {self.year}")
+        print(f"Статус: {'Прочитана' if self.is_read else 'Не прочитана'}")
+        print(f"Прогресс: {self.current_page}/{self.pages} страниц")
+    
+    def read_page(self):
+        if self.current_page < self.pages:
+            self.current_page += 1
+            print(f"Прочитана страница {self.current_page}/{self.pages}")
+            if self.current_page == self.pages:
+                self.is_read = True
+                print("Книга полностью прочитана!")
+        else:
+            print("Книга уже прочитана!")
+    
+    def set_bookmark(self, page):
+        if 0 <= page <= self.pages:
+            self.current_page = page
+            print(f"Закладка установлена на странице {page}")
+        else:
+            print("Неверный номер страницы!")
+
+book2 = Book("Преступление и наказание", "Федор Достоевский", 672, "Роман", 1866)
+book2.show_info()
+book2.read_page()
+book2.set_bookmark(50)
+book2.show_info()
