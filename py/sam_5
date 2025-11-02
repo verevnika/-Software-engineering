@@ -1,0 +1,40 @@
+class AudioBook:
+    def __init__(self, title, author, duration):
+        self.title = title
+        self.author = author
+        self.duration = duration
+        self.current_time = 0
+    
+    def show_info(self):
+        print(f"Аудиокнига: '{self.title}'")
+        print(f"Автор: {self.author}")
+        print(f"Длительность: {self.duration} минут")
+        print(f"Прогресс: {self.current_time}/{self.duration} минут")
+    
+    def read_page(self):
+        if self.current_time < self.duration:
+            self.current_time += 10
+            print(f"Прослушано {self.current_time}/{self.duration} минут")
+            if self.current_time >= self.duration:
+                print("Аудиокнига полностью прослушана!")
+        else:
+            print("Аудиокнига уже прослушана!")
+
+def test_reading_material(material):
+    print(f"\n--- Тестирование материала: {material.title} ---")
+    material.show_info()
+    material.read_page()
+    material.read_page()
+    print("--- Тестирование завершено ---")
+
+materials = [
+    Book("Гарри Поттер", "Дж. К. Роулинг", 500, "Фэнтези", 1997),
+    Ebook("451° по Фаренгейту", "Рэй Брэдбери", 256, "Научная фантастика", 1953, "EPUB", 3),
+    AudioBook("Маленький принц", "Антуан де Сент-Экзюпери", 120)
+]
+
+for material in materials:
+    test_reading_material(material)
+
+print("\n" + "=" * 60)
+print("ВСЕ ЗАДАНИЯ ВЫПОЛНЕНЫ!")
