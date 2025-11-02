@@ -1,0 +1,13 @@
+class Book:
+    def __init__(self, title, author, pages):
+        self.title = title
+        self.author = author
+        self.pages = pages
+    
+    def show_info(self):
+        print(f"Книга: '{self.title}'")
+        print(f"Автор: {self.author}")
+        print(f"Страниц: {self.pages}")
+
+my_book = Book("Мастер и Маргарита", "Михаил Булгаков", 480)
+my_book.show_info()
