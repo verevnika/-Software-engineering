@@ -1,0 +1,118 @@
+class Tomato:
+    states = ['отсутствует', 'цветение', 'зеленый', 'красный']
+    
+    def __init__(self, index):
+        self._index = index
+        self._state = self.states[0]
+    
+    def grow(self):
+        current_index = self.states.index(self._state)
+        if current_index < len(self.states) - 1:
+            self._state = self.states[current_index + 1]
+    
+    def is_ripe(self):
+        return self._state == 'красный'
+    
+    def __str__(self):
+        return f"Помидор {self._index}: {self._state}"
+
+
+class TomatoBush:
+    def __init__(self, num_tomatoes):
+        self.tomatoes = [Tomato(i) for i in range(1, num_tomatoes + 1)]
+    
+    def grow_all(self):
+        for tomato in self.tomatoes:
+            tomato.grow()
+    
+    def all_are_ripe(self):
+        return all(tomato.is_ripe() for tomato in self.tomatoes)
+    
+    def give_away_all(self):
+        self.tomatoes.clear()
+    
+    def get_tomatoes_info(self):
+        return [str(tomato) for tomato in self.tomatoes]
+
+
+class Gardener:
+    def __init__(self, name, plant):
+        self.name = name
+        self._plant = plant
+    
+    @staticmethod
+    def knowledge_base():
+        print("=" * 50)
+        print("СПРАВКА ПО САДОВОДСТВУ")
+        print("=" * 50)
+        print("Стадии созревания помидора:")
+        for i, stage in enumerate(Tomato.states):
+            print(f"  {i+1}. {stage}")
+        print("\nСоветы:")
+        print("  - Регулярно ухаживайте за растениями")
+        print("  - Собирайте урожай только когда все помидоры красные")
+        print("  - После сбора урожая куст очищается")
+        print("=" * 50)
+        print()
+    
+    def work(self):
+        print(f"{self.name} ухаживает за кустом с помидорами...")
+        self._plant.grow_all()
+        self.show_plant_status()
+    
+    def harvest(self):
+        if self._plant.all_are_ripe():
+            print(f"{self.name} собирает урожай!")
+            harvested_count = len(self._plant.tomatoes)
+            self._plant.give_away_all()
+            print(f"Урожай собран! Собрано {harvested_count} помидоров.")
+            return True
+        else:
+            print(f"{self.name}: Помидоры еще не созрели! Нужно продолжать ухаживать.")
+            return False
+    
+    def show_plant_status(self):
+        print(f"Текущее состояние куста:")
+        for tomato_info in self._plant.get_tomatoes_info():
+            print(f"  {tomato_info}")
+        print()
+
+
+if __name__ == "__main__":
+    print("НАЧАЛО ТЕСТИРОВАНИЯ")
+    print("=" * 60)
+    
+    print("1. ВЫЗОВ СПРАВКИ ПО САДОВОДСТВУ:")
+    Gardener.knowledge_base()
+    
+    print("2. СОЗДАНИЕ ОБЪЕКТОВ:")
+    bush = TomatoBush(3)
+    gardener = Gardener("Иван", bush)
+    
+    print(f"Создан куст с {len(bush.tomatoes)} помидорами")
+    print(f"Создан садовник: {gardener.name}")
+    gardener.show_plant_status()
+    
+    print("3. УХОД ЗА РАСТЕНИЯМИ:")
+    for day in range(1, 4):
+        print(f"--- День {day} ---")
+        gardener.work()
+    
+    print("4. ПЕРВАЯ ПОПЫТКА СБОРА УРОЖАЯ:")
+    gardener.harvest()
+    
+    print("\n5. ПРОДОЛЖАЕМ УХАЖИВАТЬ:")
+    for day in range(4, 6):
+        print(f"--- День {day} ---")
+        gardener.work()
+    
+    print("6. ФИНАЛЬНАЯ ПОПЫТКА СБОРА УРОЖАЯ:")
+    success = gardener.harvest()
+    
+    if success:
+        print("УРОЖАЙ УСПЕШНО СОБРАН!")
+    else:
+        print("Урожай еще не готов...")
+    
+    print("\n" + "=" * 60)
+    print("ТЕСТИРОВАНИЕ ЗАВЕРШЕНО")
